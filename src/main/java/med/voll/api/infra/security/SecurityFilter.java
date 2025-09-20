@@ -13,6 +13,18 @@ import java.io.IOException;
 public class SecurityFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        var tokenJWT= recuperarToken(request);
+        System.out.println(tokenJWT);
         filterChain.doFilter(request, response);
+
+    }
+
+    private String recuperarToken(HttpServletRequest request) {
+        var autorizationHeader = request.getHeader("Authorization");
+
+        if (autorizationHeader == null){
+            throw new RuntimeException("Token JWT não enviado no cabeçalho Authorization!");
+        }
+        return autorizationHeader.replace("Bearer","");
     }
 }
