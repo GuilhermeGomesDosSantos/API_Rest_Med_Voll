@@ -10,7 +10,6 @@ import med.voll.api.domain.endereco.Endereco;
 @Table(name = "pacientes")
 @Entity(name = "Paciente")
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Paciente {
@@ -28,6 +27,8 @@ public class Paciente {
     private Endereco endereco;
 
     private Boolean ativo;
+
+    public Paciente(){}
 
     public Paciente(DadosCadastroPaciente dados) {
         this.ativo = true;
